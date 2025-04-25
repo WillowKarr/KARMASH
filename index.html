@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=National+Park:wght@200..800&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARMASH | Портфолио</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #FFD700;
+            --bg-light: white;
+            --bg-dark: #1A1A1A;
+            --text-light: #333;
+            --text-dark: #F5F5F5;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        } 
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            transition: var(--transition);
+            overflow-x: hidden;
+			
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        /* Custom cursor */
+        .cursor {
+        width: 12px;
+        height: 12px;
+        background-color: #8B0000; 
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transition: transform 0.2s ease;
+        }
+
+        .cursor-follower {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #8B0000;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: difference;
+            transition: transform 0.4s ease, width 0.3s ease, height 0.3s ease;
+        }
+
+        /* Header Navigation */
+        header {
+        position: fixed;
+        top: 15px; /* Отступ сверху */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%; /* Уже чем на всю ширину */
+        max-width: 1000px; /* Максимальная ширина */
+ 	grid-template-columns: auto 1fr auto;
+        padding: 0.5rem 1.5rem; /* Меньше padding */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        background: rgba(255, 248, 225, 0.6);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        border-radius: 30px; /* Скругленные углы */
+        }
+
+        body.dark-mode header {
+            background: rgba(219, 215, 210, 0.9);
+	color: #8B0000;
+        }
+
+        .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transition);
+        }
+
+nav {
+    margin-left: auto; /* Прижимаем навигацию к центру */
+    margin-right: auto;
+    transform: translateX(-50px); /* Корректировка позиции */
+}
+
+        nav ul {
+            display: flex;
+            list-style: none;
+	justify-content: center;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        body.dark-mode nav ul li a {
+            color: #8B0000;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        body.dark-mode nav ul li a::after {
+            background-color: var(--secondary-color);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .burger div {
+            background-color: var(--secondary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('home.gif') no-repeat center center/cover;
+            filter: blur(5px) brightness(0.7);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-family: 'a_PlakatTitul', ExtraBold;
+            font-size: 6rem;
+            color: var(--secondary-color);
+            text-shadow: 3px 3px 0 var(--primary-color);
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards 1s;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #F3F2EF;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards 1.5s;
+        }
+
+        .contact-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards 2s;
+            z-index: 100;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background-color: #6B0000;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        body.dark-mode .about::before {
+            opacity: 0.05;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(0.9);
+            transition: transform 0.5s ease;
+        }
+
+        .about-content.active {
+            transform: scale(1);
+        }
+
+        .about-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .about-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: var(--shadow);
+        }
+
+        body.dark-mode .skill-tag {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        body.dark-mode .timeline-content {
+            background-color: #2A2A2A;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            top: 20px;
+            background-color: var(--bg-light);
+            transform: rotate(45deg);
+            box-shadow: 2px -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .timeline-item:nth-child(odd) .timeline-content::after {
+            background-color: #2A2A2A;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: -10px;
+            top: 20px;
+            background-color: var(--bg-light);
+            transform: rotate(45deg);
+            box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .timeline-item:nth-child(even) .timeline-content::after {
+            background-color: #2A2A2A;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-mode .timeline-date {
+            color: var(--secondary-color);
+        }
+        /* Projects Section */
+        .projects {
+            padding: 5rem 2rem;
+            background-color: rgba(255, 216, 0, 0.1);
+        }
+
+        body.dark-mode .projects {
+            background-color: #F8F8F8;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        body.dark-mode .section-title {
+            color: var(--secondary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        body.dark-mode .section-title::after {
+            background-color: #F8F8F8;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--bg-light);
+            margin: 2rem auto;
+            max-width: 900px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: #F8F8F8;
+        }
+
+        .modal.active .modal-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .modal-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .modal-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .modal-nav-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .modal-title {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            flex: 1;
+            min-width: 300px;
+            padding-left: 2rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            background-color: #6B0000;
+        }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode footer {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-body {
+                flex-direction: column;
+            }
+            
+            .modal-description {
+                padding-left: 0;
+                padding-top: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-light);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                clip-path: circle(0px at 90% -10%);
+                transition: all 0.5s ease-out;
+                pointer-events: none;
+            }
+
+            body.dark-mode nav ul {
+                background-color: var(--bg-dark);
+            }
+
+            nav ul.open {
+                clip-path: circle(1000px at 90% -10%);
+                pointer-events: all;
+            }
+
+            nav ul li {
+                margin: 1rem 0;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .burger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .burger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .burger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            /* Обновленные стили для Timeline */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background-color: var(--primary-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+    z-index: 0;
+}
+
+.timeline-item {
+    padding: 15px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.timeline-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    padding-right: 70px;
+    padding-left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    padding-left: 70px;
+    padding-right: 0;
+}
+
+.timeline-content {
+    padding: 20px;
+    background-color: var(--bg-light);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.timeline-date {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    top: 20px;
+    z-index: 1;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 0 0 4px var(--bg-light);
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+    right: -12px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    left: -12px;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+        left: 0 !important;
+    }
+    
+    .timeline-item:nth-child(even) {
+        padding-left: 70px;
+    }
+    
+    .timeline-dot {
+        left: 20px !important;
+    }
+    
+    .timeline-content {
+        padding: 15px;
+    }
+}
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .modal-header {
+                height: 200px;
+            }
+        }
+		
+		 /* Стили галереи */
+.portfolio-gallery {
+    padding: 2rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 8px;
+    width: 100%;
+}
+
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 0;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    height: 100%; /* Добавляем высоту 100% */
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    flex-shrink: 0; /* Запрещаем сжатие контейнера с изображением */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.item-tag {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    padding: 8px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 0.4 rem;
+    font-weight: 200;
+    letter-spacing: 0.5px;
+    border-radius: 15px 0 0 15px;
+    z-index: 2;
+}
+
+.item-info {
+    padding: 20px;
+    color: #333;
+    background: white;
+    flex-grow: 1; /* Растягиваем блок на доступное пространство */
+    display: flex;
+    flex-direction: column;
+    min-height: 120px; /* Фиксированная минимальная высота */
+    justify-content: space-between; /* Прижимаем контент к верху и низу */
+    border-top: 1px solid #eee; /* Граница между изображением и текстом */
+}
+
+.item-title {
+    font-size: 1rem;
+	line-height: 24px;
+	text-transform: uppercase;
+    margin: 0 0 8px 0;
+    color: #222;
+    line-height: 1rem;
+}
+
+.item-description {
+    font-size: 1rem;
+	ine-height: 2;
+    margin: 0;
+    color: #666;
+    line-height: 1.4;
+    flex-grow: 1; /* Описание занимает доступное пространство */
+}
+
+/* Темная тема */
+body.dark-mode .item-info {
+    background: #1A1A1A;
+    border-top-color: #444;
+}
+
+body.dark-mode .item-title {
+    color: #eee;
+}
+
+body.dark-mode .item-description {
+    color: #aaa;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    
+    .item-info {
+        padding: 15px;
+        min-height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .item-info {
+        min-height: 90px;
+    }
+}
+
+/* Стили модального окна */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: none;
+  overflow-y: auto;
+}
+
+.modal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #000;
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.3s;
+}
+
+.close-modal:hover {
+  transform: rotate(90deg);
+}
+
+/* Стили слайдера */
+.project-slider {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+}
+
+.slider-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slider-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.prev-slide {
+  left: 20px;
+}
+
+.next-slide {
+  right: 20px;
+}
+
+/* Стили контента проекта */
+.project-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 40px;
+}
+
+.project-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-tag {
+  background: #f0f0f0;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.project-description p {
+  line-height: 1.6;
+}
+
+/* Курсор-лупа для изображений */
+.gallery-item {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='white' stroke-width='2'/%3E%3Cline x1='24' y1='24' x2='30' y2='30' stroke='white' stroke-width='2'/%3E%3C/svg%3E") 16 16, zoom-in;
+}
+
+.project-description a {
+  color: var(--primary-color);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: color 0.3s;
+}
+
+.project-description a:hover {
+  color: #d32f2f;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .project-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-slider {
+    height: 40vh;
+  }
+}
+body.dark-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.95); /* Более темный фон оверлея */
+}
+
+body.dark-mode .modal-container {
+  background: #1a1a1a; /* Основной фон окна */
+}
+
+body.dark-mode .project-slider {
+  background: #000; /* Фон слайдера */
+  border-bottom: 1px solid #333; /* Разделитель */
+}
+
+body.dark-mode .project-content {
+  background: #1a1a1a; /* Фон контентной части */
+}
+
+body.dark-mode .project-title {
+  color: white;
+}
+
+body.dark-mode .project-description {
+  color: #ccc; /* Светло-серый текст */
+}
+
+body.dark-mode .project-description a {
+  color: #585858;
+}
+
+body.dark-mode .project-description a:hover {
+  color: #fff; /* Белый при наведении */
+}
+
+body.dark-mode .project-tag {
+  background: #585858;
+  color: white;
+}
+
+body.dark-mode .slider-nav-btn {
+  background: rgba(139, 0, 0, 0.7); /* Темно-красный */
+  color: var(--secondary-color); /* Золотой */
+  border: 1px solid var(--secondary-color);
+}
+
+body.dark-mode .slider-nav-btn:hover {
+  background: var(--primary-color); /* Красный при наведении */
+}
+
+/* Анимации для темной темы */
+body.dark-mode .modal-container {
+  animation: darkFadeIn 0.4s ease-out;
+}
+
+@keyframes darkFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    box-shadow: 0 0 0 rgba(255, 215, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+  }
+}
+        .contacts {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+			  background-image: url('contact.');
+  background-size: cover;
+  background-attachment: fixed; /* Фиксирует фон при скролле */
+  background-position: center;
+  margin: 0;
+  height: 100vh;
+			
+        }
+        .contacts::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .contacts::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .contact-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding: 50px;
+            background: var(--primary-color);
+            color: white;
+            position: relative;
+        }
+
+        .contact-info::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(to right, rgba(108, 92, 231, 0), rgba(200, 32, 32, 5));
+        }
+	}
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+		.contact-title {
+    color: white /* Основной цвет */
+}
+
+        .contact-info p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            flex: 1;
+            padding: 50px;
+            background: white;
+        }
+
+        .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #dfe6e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+		
+		.submit-btn {
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center;    /* Центрирование по вертикали */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.5rem;
+    transition: var(--transition);
+    text-decoration: none;
+    /* Убедитесь, что нет лишних отступов */
+    padding: 0;
+    margin: 0;
+}
+
+        .submit-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .submit-btn i {
+            margin-left: 8px;
+        }
+
+        /* Анимация успешной отправки */
+        .success-message {
+            display: none;
+            background: #2ecc71;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 30px;
+            }
+            
+            .contact-info::after {
+                display: none;
+            }
+        }
+		body.dark-mode .contact-title {
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+<img src="logo.svg">
+</div>
+        <nav>
+            <ul>
+                <li><a href="#about">Обо мне</a></li>
+                <li><a href="#projects">Проекты</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" aria-label="Toggle theme">
+        </button>
+        <div class="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>KARMASH</h1>
+        <p>Многопрофильный дизайнер, кукольник и художник</p>
+        <a href="#contacts" class="contact-btn">Связаться</a>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">Обо мне</h2>
+        <div class="about-content">
+            <img src="about.png" alt="Фото" class="about-photo">
+            <div class="about-text">
+                <p> Дизайнер с двухлетним опытом работы. Я занимаюсь графическим дизайном, версткой сайтов, а также созданием дизайна для полиграфии, презентаций и постов в соц. сетях. Помимо этого я рисую картинки и делаю очаровательных кукол.
+Имею опыт работы в команде, и я ценю процесс совместного творчества, ведь он позволяет превратить идеи в реальность. Открыта к новым проектам и сотрудничеству — буду рада внести свой вклад в создание дизайна будущего!</p>
+            </div>
+            <div class="skills">
+                <span class="skill-tag">Графический дизайн</span>
+                <span class="skill-tag">Куклы ручной работы</span>
+                <span class="skill-tag">Иллюстрация</span>
+                <span class="skill-tag">SMM Дизайн</span>
+                <span class="skill-tag">Анимация и медиа</span>
+                <span class="skill-tag">Дизайн полиграфии</span>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2016-2020</div>
+                        <h3>Художественная школа</h3>
+                        <p>Изучение основ рисунка, живописи и композиции. Первые шаги в мире искусства.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020-2021</div>
+                        <h3>Курсы рисования и композиции им. Косыгина</h3>
+                        <p>Подготовка к поступлению, углубленное изучение рисунка</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021 - 2024</div>
+                        <h3>Колледж ДПИ им. Карла Фаберже. Направление Дизайн IT</h3>
+                        <p>создание визуального контента (логотипы, веб-дизайн, анимацию). Основы программирования, графического дизайна для реализации дизайн-проектов.</p>
+                    </div>
+                </div>
+<div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">03.2024-05.2024</div>
+                        <h3>ЛК СПЕКТР</h3>
+                        <p>Проектная работа, создание лендинга и фирменной продукции</p>
+                    </div>
+                </div>
+<div class="timeline-item">
+ <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">09.2024-03.2025</div>
+                        <h3>ЛОГОПОТАМ</h3>
+                        <p>Визуальный контент для соцсетей (сторис, посты, обложки, рекламные баннеры), адаптация стиля бренда под разные платформы.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">05.2024 - Настоящее время</div>
+                        <h3>Фриланс, проектная работа</h3>
+                        <p>Расширение навыков и компетенций, сотрудничество с брендами и выполнение заказов.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Галерея проектов -->
+<section class="portfolio-gallery" id="projects">
+    <h2 class="section-title">Портфолио</h2>
+    <div class="gallery-grid">
+        <!-- Пример элемента -->
+        <div class="gallery-item" data-project="logopotam">
+            <div class="image-container">
+                <span class="item-tag">SMM дизайн</span>
+                <img src="case_1.png" alt="Логопотам">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">оформление соц. сетей Логопотам</h3>
+                <p class="item-description"> Ведение соц. сетей, оформление постов и креативов, дизайн площадок</p>
+            </div>
+        </div>
+
+        <div class="gallery-item" data-project="circusdolls">
+            <div class="image-container">
+                <span class="item-tag">Куклы</span>
+                <img src="case_2.png" alt="Серия кукол волшебников">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Куклы-циркачи</h3>
+                <p class="item-description">Коллекция кукол в цирковой тематике, герои нарядились цирковыми артистами</p>
+            </div>
+        </div>
+
+        <div class="gallery-item" data-project="autumnart">
+            <div class="image-container">
+                <span class="item-tag">Иллюстрация</span>
+                <img src="case_3.png" alt="иллюстрации">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Осенние иллюстрации</h3>
+                <p class="item-description">Мрачные и дождливые картинки для открыток</p>
+            </div>
+        </div>
+
+ <div class="gallery-item" data-project="mebelsoft">
+            <div class="image-container">
+                <span class="item-tag">Графический дизайн</span>
+                <img src="case_4.png" alt="Мебель_SOFT">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Фирменный стиль для мебельной фирмы "МЕБЕЛЬ-SOFT"</h3>
+                <p class="item-description">Разработка айдентики, корпоративной продукции</p>
+            </div>
+        </div>
+		
+		<div class="gallery-item" data-project="girlandmonster">
+            <div class="image-container">
+                <span class="item-tag">Иллюстрация</span>
+                <img src="case_5.png" alt="Девочка и монстр">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Девочка и монстр</h3>
+                <p class="item-description">Разработка иллюстрации в разных форматах для печати в виде плаката</p>
+            </div>
+        </div>
+		
+		<div class="gallery-item" data-project="aurora">
+            <div class="image-container">
+                <span class="item-tag">UX-UI дизайн</span>
+                <img src="case_6.png" alt="Сайт_Аврора">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Лендинг "Аврора"</h3>
+                <p class="item-description">Вёрстка лендинга для столовой "АВРОРА" компании "СПЕКТР"</p>
+            </div>
+        </div>
+		
+		<div class="gallery-item">
+            <div class="image-container">
+                <span class="item-tag">Иллюстрация</span>
+                <img src="case_.png" alt="Тстикеры">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Стикеры для ТБанк</h3>
+                <p class="item-description">Раззрабтка концепта, отрисовка векторной иллюстрации, подготовка к печати</p>
+            </div>
+        </div>
+		
+		<div class="gallery-item" data-project="random">
+            <div class="image-container">
+                <span class="item-tag">Иллюстрация, SMM</span>
+                <img src="case_7.png" alt="Афиша">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Афиши мероприятий</h3>
+                <p class="item-description">Разработка иллюстраций для постов в соц. сетях, написание поста</p>
+            </div>
+        </div>
+		
+		<div class="gallery-item" data-project="cofee">
+            <div class="image-container">
+                <span class="item-tag">Векторная иллюстрация</span>
+                <img src="case_9.png" alt="дизайн_стаканчика">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Дизайн для кофейного стаканчика</h3>
+                <p class="item-description">Отрисовка векторной иллюстрации для печати на кофейном стаканчике</p>
+            </div>
+        </div>
+		
+		<div class="gallery-item" data-project="journal">
+            <div class="image-container">
+                <span class="item-tag">Дизайн полиграфии</span>
+                <img src="case_10.png" alt="журнал">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Вёрстка журнала "Швейцарская школа графики 50-70ых годов"</h3>
+                <p class="item-description">Вёрстка в модернистическом стиле, поиск изображений</p>
+            </div>
+        </div>
+		
+				<div class="gallery-item" data-project="dolls">
+            <div class="image-container">
+                <span class="item-tag">Куклы, SMM</span>
+                <img src="case_13.png" alt="Эндрю">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Куклы на свбодную тематику</h3>
+                <p class="item-description">Создание кукол, съемка и обработка stop motion анимаций, ведение аккаунтов в соц. сетях</p>
+            </div>
+        </div>
+		
+				
+		<div class="gallery-item" data-project="nashakuxnya">
+            <div class="image-container">
+                <span class="item-tag">Графический дизайн</span>
+                <img src="case_12.png" alt="наша_кухня">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Фирменный стиль для бренда "НАША КУХНЯ"</h3>
+                <p class="item-description">Разработка айдентики, дизайн кода, рекламной печатной и цифровой продукции</p>
+            </div>
+        </div>
+		
+			<div class="gallery-item" data-project="karmash">
+            <div class="image-container">
+                <span class="item-tag">Графический дизайн</span>
+                <img src="case_14.png" alt="Кармаш">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Разработка фирменного стиля для бренда Кармаш</h3>
+                <p class="item-description">Айдентика, макетирование упаковки, полиграфической продукции для бренда изделий ручной работы</p>
+            </div>
+        </div>
+				
+			<div class="gallery-item" data-project="tatoo">
+            <div class="image-container">
+                <span class="item-tag">Тату</span>
+                <img src="case_16.png" alt="Тату">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Татуировки</h3>
+                <p class="item-description">Несколько эскизов для татуировк на свободную таматику</p>
+            </div>
+        </div>
+		
+				<div class="gallery-item" data-project="logo">
+            <div class="image-container">
+                <span class="item-tag">Графический дизайн</span>
+                <img src="case_18.png" alt="Феникс">
+            </div>
+            <div class="item-info">
+                <h3 class="item-title">Логотип для спортивной команды "Феникс"</h3>
+                <p class="item-description">Разработка логотипа на основе эскиза</p>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal-overlay" id="portfolioModal">
+  <div class="modal-container">
+    <button class="close-modal">&times;</button>
+    
+    <!-- Слайдер изображений -->
+    <div class="project-slider">
+      <div class="slider-container">
+        <img src="" alt="" class="active-slide">
+        <!-- Другие изображения будут добавляться динамически -->
+      </div>
+      <button class="slider-nav prev-slide">&lt;</button>
+      <button class="slider-nav next-slide">&gt;</button>
+    </div>
+    
+    <!-- Контент проекта -->
+    <div class="project-content">
+      <div class="project-details">
+        <h2 class="project-title"></h2>
+        <div class="project-tags">
+          <!-- Теги будут добавляться динамически -->
+        </div>
+      </div>
+      <div class="project-description">
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <section class="contacts" id="contacts">
+        <div class="contact-container">
+            <div class="contact-info">
+				<h2 class="section-title contact-title">Контакты</h2>
+                <p>Если вы хотите обсудить потенциальный проект или просто сказать привет, не стесняйтесь связаться со мной!</p>
+                <p><i class="fas fa-envelope"></i> karmash.art@example.com</p>
+                <p><i class="fas fa-phone"></i> +7 (123) 456-78-90</p>
+                <p><i class="fas fa-map-marker-alt"></i> Москва, Россия</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Behance"><i class="fab fa-behance"></i></a>
+                    <a href="#" class="social-link" title="Telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" title="Dribbble"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Связаться со мной</h3>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" class="form-control" required>
+                        <div class="error-message" id="nameError">Пожалуйста, введите ваше имя</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                        <div class="error-message" id="emailError">Пожалуйста, введите корректный email</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                        <div class="error-message" id="messageError">Пожалуйста, введите ваше сообщение</div>
+                    </div>
+                    <button type="submit" class="submit-btn">Отправить <i class="fas fa-paper-plane"></i></button>
+                </form>
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                    <h3>Спасибо!</h3>
+                    <p>Ваше сообщение успешно отправлено. Я свяжусь с вами в ближайшее время.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('feedbackForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Валидация формы
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Проверка имени
+                const name = document.getElementById('name');
+                const nameError = document.getElementById('nameError');
+                if (name.value.trim() === '') {
+                    nameError.style.display = 'block';
+                    name.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    nameError.style.display = 'none';
+                    name.style.borderColor = '#dfe6e9';
+                }
+                
+                // Проверка email
+                const email = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    emailError.style.display = 'block';
+                    email.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                    email.style.borderColor = '#dfe6e9';
+                }
+                
+                // Проверка сообщения
+                const message = document.getElementById('message');
+                const messageError = document.getElementById('messageError');
+                if (message.value.trim() === '') {
+                    messageError.style.display = 'block';
+                    message.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    messageError.style.display = 'none';
+                    message.style.borderColor = '#dfe6e9';
+                }
+                
+                // Если форма валидна
+                if (isValid) {
+                    // Здесь можно добавить AJAX-запрос для отправки формы
+                    // Для примера просто покажем сообщение об успехе
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // Очистка формы через 5 секунд
+                    setTimeout(() => {
+                        form.reset();
+                        form.style.display = 'block';
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }
+            });
+            
+            // Анимация при наведении на социальные иконки
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('i');
+                    icon.style.transform = 'rotate(15deg)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('i');
+                    icon.style.transform = 'rotate(0)';
+                });
+            });
+        });
+    </script>
+	</body>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2023 KARMASH. Все права защищены.</p>
+</footer>
+
+<!-- JavaScript -->
+<script>
+    // Theme Toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+    const icon = themeToggle.querySelector('i');
+
+    // Check for saved user preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme) {
+        body.classList.add(currentTheme);
+        if (currentTheme === 'dark-mode') {
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+    }
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            localStorage.setItem('theme', '');
+            icon.classList.replace('fa-sun', 'fa-moon');
+        }
+    });
+
+    // Burger Menu
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('nav ul');
+
+    burger.addEventListener('click', () => {
+        nav.classList.toggle('open');
+        burger.classList.toggle('active');
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+
+            // Close mobile menu if open
+            if (nav.classList.contains('open')) {
+                nav.classList.remove('open');
+                burger.classList.remove('active');
+            }
+        });
+    });
+
+    // Scroll animations
+    function checkScroll() {
+        // About section scale animation
+        const aboutSection = document.querySelector('.about');
+        const aboutContent = document.querySelector('.about-content');
+        const aboutPosition = aboutSection.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+
+        if (aboutPosition < screenPosition) {
+            aboutContent.classList.add('active');
+        }
+
+        // Timeline items animation
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach((item, index) => {
+            const itemPosition = item.getBoundingClientRect().top;
+            if (itemPosition < screenPosition) {
+                setTimeout(() => {
+                    item.classList.add('active');
+                }, index * 200);
+            }
+        });
+    }
+
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('load', checkScroll);
+
+    // Custom cursor
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        setTimeout(() => {
+            cursorFollower.style.left = e.clientX + 'px';
+            cursorFollower.style.top = e.clientY + 'px';
+        }, 100);
+    });
+
+    // Cursor effects on hover
+    const hoverElements = document.querySelectorAll('a, button, .project-card, .social-link, .burger');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(2)';
+            cursorFollower.style.transform = 'scale(0.5)';
+            cursorFollower.style.backgroundColor = 'transparent';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursorFollower.style.transform = 'scale(1)';
+            cursorFollower.style.backgroundColor = 'transparent';
+        });
+    });
+
+    // Modal functionality
+    const projectButtons = document.querySelectorAll('.project-btn');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    const prevButtons = document.querySelectorAll('.prev-slide');
+    const nextButtons = document.querySelectorAll('.next-slide');
+
+    // Open modal
+    projectButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalId = button.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Reset slider position
+            const slider = modal.querySelector('.modal-slider');
+            slider.style.transform = 'translateX(0)';
+            
+            // Show modal with animation
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        });
+    });
+
+    // Close modal
+    closeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        });
+    });
+
+    // Close when clicking outside modal content
+    modals.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+        });
+    });
+
+    // Modal slider functionality
+    modals.forEach(modal => {
+        const slider = modal.querySelector('.modal-slider');
+        const slides = modal.querySelectorAll('.modal-slide');
+        const prevBtn = modal.querySelector('.prev-slide');
+        const nextBtn = modal.querySelector('.next-slide');
+        let currentSlide = 0;
+        const slideCount = slides.length;
+
+        function goToSlide(index) {
+            if (index < 0) index = slideCount - 1;
+            if (index >= slideCount) index = 0;
+            currentSlide = index;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                goToSlide(currentSlide - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                goToSlide(currentSlide + 1);
+            });
+        }
+    });
+
+    // Form validation
+    const form = document.getElementById('feedbackForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const messageError = document.getElementById('messageError');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let isValid = true;
+
+        // Name validation
+        if (nameInput.value.trim() === '') {
+            nameError.style.display = 'block';
+            isValid = false;
+        } else {
+            nameError.style.display = 'none';
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value.trim())) {
+            emailError.style.display = 'block';
+            isValid = false;
+        } else {
+            emailError.style.display = 'none';
+        }
+
+        // Message validation
+        if (messageInput.value.trim() === '') {
+            messageError.style.display = 'block';
+            isValid = false;
+        } else {
+            messageError.style.display = 'none';
+        }
+
+        if (isValid) {
+            // Here you would typically send the form data to a server
+            alert('Сообщение отправлено! Спасибо за ваше обращение.');
+            form.reset();
+        }
+    });
+
+    // Lazy loading for images
+    if ('loading' in HTMLImageElement.prototype) {
+        // Native lazy loading is supported
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+        });
+    } else {
+        // Fallback for browsers without native lazy loading
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        
+        const lazyLoad = () => {
+            lazyImages.forEach(img => {
+                if (img.getBoundingClientRect().top < window.innerHeight + 100) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                }
+            });
+        };
+
+        window.addEventListener('load', lazyLoad);
+        window.addEventListener('scroll', lazyLoad);
+        window.addEventListener('resize', lazyLoad);
+    }
+	
+	// JavaScript для работы модального окна
+document.addEventListener('DOMContentLoaded', function() {
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const modal = document.getElementById('portfolioModal');
+  const closeBtn = document.querySelector('.close-modal');
+  const sliderContainer = document.querySelector('.slider-container');
+  const prevBtn = document.querySelector('.prev-slide');
+  const nextBtn = document.querySelector('.next-slide');
+  const projectTitle = document.querySelector('.project-title');
+  const projectDesc = document.querySelector('.project-description p');
+  const projectTags = document.querySelector('.project-tags');
+  
+  // Данные проектов (можно заменить на динамическую загрузку)
+  const projects = {
+    'logopotam': {
+      title: 'Оформление соц. сетей Логопотам',
+      description: 'Создавание уникальной визуальной айдентики, для нескольких направлений Логопотам (приложение, лого, психология) учитывающей ЦА каждого из направлений бренда. Разработка графических концепций и адаптаций дизайн под соцсети. В мои задачи входила вёрстка контента, оформление сторис и рекламных креативов, цветокоррекция и ретушь, а также отрисовка векторных иконок и изображений, работа с нейросетями. Работала с платформами VK и Telegram, тесно взаимодействовала с SMM-командой, чтобы контент оставался стильным и эффективным. В было создано 300+ креативов для всех направлений компании.',
+      tags: ['Figma', 'Photoshop', 'Illustrator', 'II Grock'],
+      images: [
+        'element1.png',
+        'element2.png',
+        'element3.png',
+		'element4.png'
+      ]
+    },
+    'circusdolls': {
+      title: 'Цирковая коллекция кукол',
+      description: 'Серия уникальных кукол, воплощающих образы цирковых артистов: от эксцентричных клоунов до грациозных гимнастов. Каждая кукла на проволочном каркасе, некоторые элементы слеплены из глины. Образы дополняют сложные детализированные костюмы ручной работы.  Коллекция передает магию цирка через призму авторского художественного видения с индивидуальной проработкой каждого характера.',
+      tags: ['Лепка', 'Рукоделие', 'Шитье'],
+      images: [
+        'element5.png',
+        'element6.png',
+        'element7.png',
+		'element8.png'
+      ]
+    },
+		  'autumnart': {
+      title: 'Осенние иллюстрации',
+      description: 'Серия иллюстраций выполнена в мрачной, меланхоличной эстетике с имитацией фактуры восковых мелков и угля. Цветовая палитра построена на глубоких охристых, тускло-бордовых и свинцово-серых тонах с акцентными охристыми цветами. Иллюстрации можно использовать в качестве открыток, значков, стикеров.',
+      tags: ['Adobe Photoshop', 'Krita'],
+      images: [
+        'element9.png',
+        'element10.png',
+		'element12.png'
+      ]
+    },
+		'mebelsoft': {
+      title: 'Фирменный стиль для мебельной фирмы МЕБЕЛЬ-SOFT',
+      description: 'Логотип, красное кресло в обрамлении желтого окна, стал смысловым и визуальным центром всей айдентики мебельного магазина. Он передает ценности компании: элегантность модерна, уют и индивидуальность.Кресло, выполненное в насыщенном красном, символизирует комфорт и смелый дизайн, а желтое окно добавляет теплоту и ассоциации с естественным светом, простором и открытостью. Контраст цветов делает логотип динамичным и запоминающимся, а силуэт кресла отсылает к классическим формам ар-нуво, подчеркивая связь с историей дизайна.Логотип работает как самостоятельный графический символ: его можно обыгрывать в рекламе, использовать в паттернах или даже как элемент интерьера, усиливая связь бренда с темой стильной и продуманной мебели.',
+      tags: ['Adobe Illustrator', 'Adobe Photoshop'],
+      images: [
+        'element13.png',
+        'element14.png',
+        'element15.png',
+		'element16.png'
+      ]
+    },
+		'girlandmonster': {
+      title: 'Иллюстрация Девочка и монстр',
+      description: 'Иллюстрация разработана по эскизу заказчика в фантезийной, сказочной эстетике. Монстр приглашает девочку в волшебный мир, важно было переддать дружелюбное настроение монстра и радость персонажа. Также работа была адаптирована под разные форматы для печати на футболке и настенном гобелене.',
+      tags: ['Adobe Photoshop'],
+      images: [
+        'element17.png',
+		'element18.png'
+      ]
+    },
+		'aurora': {
+      title: 'Лендинг Аврора',
+      description: '<a href="https://aurora-cafe.ru/" target="_blank" rel="noopener noreferrer">Разработка лендинга для столовой «АВРОРА»</a> началась с анализа фирменного стиля заведения и утверждения цветовой схемы (зеленый, красный, белый). В Figma был создан детализированный макет, продумана структура блоков: приветственный экран с отснятым видео столовой, раздел с меню, информация о работе заведения и контакты. После утверждения дизайна макет с компонентами и autolayout был перенесен в Tilda с помощью zeroblock. Настроена адаптивная верстка под мобильные устройства.',
+      tags: ['Figma', 'Tilda', 'Adobe Illustrator'],
+      images: [
+        'element19.png'
+      ]
+    },
+		'random': {
+      title: 'Посты-афиши для мероприятий',
+      description: 'Проект заключался в создании визуального контента и продвижении игроночей по играм Fran Bow и Sally Face для ивент-коммуны <a href="https://t.me/random_culture" target="_blank" rel="noopener noreferrer">Рандом Культуры</a>. В мои задачи входила отрисовка растровых изображений для афиш и соцсетей, написание постов, а также организация публикаций для привлечения аудитории к мероприятиям. Работа была направлена на усиление визуальной идентичности событий и повышение их узнаваемости среди целевой аудитории.',
+      tags: ['Procreate', 'Krita'],
+      images: [
+        'element20.png',
+		'element21.png'
+      ]
+    },
+		'cofee': {
+      title: 'Дизайн для кофейного стаканчика',
+      description: 'Разработка векторной иллюстрации для брендированных стаканчиков «Совиного Дома». Иллюстрация выполнена в стиле весеннего леса, цвеовая гамма нейтральная, нежная. тут и там выглядывающие совы ключ атмосферы совиного антикафе.',
+	  tags: ['Procreate', 'Krita'],
+      images: [
+		'element22.png'
+      ]
+    },
+			'journal': {
+      title: 'Вёрстка журнала "Швейцарская школа графики 50-70ых годов"',
+      description: 'На разворотах журнала "Как в Аптеке. Швейцарская школа графики 50-70ых годов" реализованы принципы швейцарской верстки: строгая модульная сетка, асимметричная композиция, минималистичная типографика с контрастом шрифтов и выразительными геометричными акцентами. Использование чёрно-белой палитры с добавлением цвета подчёркивает структуру и визуальную иерархию.  В этом проекте особое внимание уделено негативному пространству, которое создает целостность композиции каждого разворота.',
+	  tags: ['Adobe InDesign', 'Adobe Photoshop'],
+      images: [
+		'element23.png',
+		'element24.png',
+		'element25.png',
+		'element26.png',
+		'element27.png'
+      ]
+    },
+			'dolls': {
+      title: 'Куклы на свободную тематику',
+      description: 'Серия авторских кукол, выполненная в едином минималистичном стиле и технике. Предназначены для продажи, выставок и конкурсов. Включает в себя куклу Эндрю — черно-белого персонажа, от лица которого велся TikTok-аккаунт с stop-motion анимацией, что способствовало продвижению творчества.',
+	  tags: ['Лепка', 'Рукоделие', 'Шитье'],
+      images: [
+		'element28.png',
+		'element29.png',
+		'element30.png'
+      ]
+    },
+				'nashakuxnya': {
+      title: 'Фирменный стиль для бренда "НАША КУХНЯ"',
+      description: 'Создание комплексной айдентики для придорожного кафе-магазина с акцентом на уютную семейную атмосферу: разработан логотип, в виде человека, поедающего шаурму, яркая цветовая палитра и графические элементы в виде еды в теплой, «домашней» стилистике. Разработан дизайн для фасада с яркими акцентами, дизайн рекламных носителей: баннеры, листовки, посты для соцсетей. Результат — целостный образ, увеличивающий посещаемость и лояльность аудитории.',
+	  tags: ['Adobe Photoshop','Adobe Illustrator', 'Krita'],
+      images: [
+		'element31.png',
+		'element32.png',
+		'element33.png',
+		'element34.png'
+      ]
+    },
+				'karmash': {
+      title: 'Фирменный стиль для бренда "КАРМАШ"',
+      description: 'Бренд «Кармаш» создаёт авторских кукол из глины на проволочном каркасе, создавая уникальных кукол. Чтобы усилить узнаваемость бренда, был разработан фирменный стиль, отражающий личность автора кукол:  основной символ ворон  — игра с фамилией автора, а звезды обозначают уникальность каждой куклы. Ключевым элементом стала брендированная упаковка в виде стилизованной кроватки, добавляющая ценности продукту и усиливая эмоциональную связь с покупателем.',
+	  tags: ['Adobe Photoshop','Adobe Illustrator', 'Krita','Лепка', 'Рукоделие', 'Шитье'],
+      images: [
+		'element39.png',
+		'element40.png',
+		'element41.png'
+      ]
+    },
+					'tatoo': {
+      title: 'Татуировки',
+      description: 'Проект представляет собой разработку индивидуальных эскизов для татуировок с полным погружением в запросы клиента — от концепции до финальных правок. Каждый эскиз создаётся как уникальный символ, отражающий личную историю или значимый образ, предназначенный для постоянного ношения.',
+	  tags: ['Adobe Illustrator', 'Krita'],
+      images: [
+		'element42.png',
+		'element43.png'
+      ]
+    },
+						'logo': {
+      title: 'Логотип для спортивной команды "Феникс"',
+      description: 'Создание логотипа для футбольной команды "Феникс" в двух цветовых вариациях, проведение предпечатной подготовки логотипа для печати его на футболках',
+	  tags: ['Adobe Illustrator'],
+      images: [
+		'element35.png',
+		'element36.png',
+		'element37.png',
+		'element38.png'
+      ]
+    },
+  };
+  
+  // Открытие модального окна
+  galleryItems.forEach(item => {
+    item.addEventListener('click', function() {
+      const projectId = this.dataset.project;
+      const project = projects[projectId];
+      
+      // Заполняем данными
+      projectTitle.textContent = project.title;
+      projectDesc.innerHTML = project.description;
+      
+      // Очищаем теги
+      projectTags.innerHTML = '';
+      project.tags.forEach(tag => {
+        const tagElement = document.createElement('span');
+        tagElement.className = 'project-tag';
+        tagElement.textContent = tag;
+        projectTags.appendChild(tagElement);
+      });
+      
+      // Очищаем слайдер и добавляем изображения
+      sliderContainer.innerHTML = '';
+      project.images.forEach((img, index) => {
+        const imgElement = document.createElement('img');
+        imgElement.src = img;
+        imgElement.alt = `${project.title} - ${index + 1}`;
+        if(index === 0) imgElement.classList.add('active-slide');
+        sliderContainer.appendChild(imgElement);
+      });
+      
+      // Показываем модальное окно
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  
+  // Закрытие модального окна
+  closeBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  });
+  
+  // Навигация слайдера
+  let currentSlide = 0;
+  
+  function updateSlider() {
+    const offset = -currentSlide * 100;
+    sliderContainer.style.transform = `translateX(${offset}%)`;
+  }
+  
+  nextBtn.addEventListener('click', function() {
+    const slides = document.querySelectorAll('.slider-container img');
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlider();
+  });
+  
+  prevBtn.addEventListener('click', function() {
+    const slides = document.querySelectorAll('.slider-container img');
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSlider();
+  });
+  
+  // Закрытие по клику вне окна
+  modal.addEventListener('click', function(e) {
+    if(e.target === modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
+});
+</script>
