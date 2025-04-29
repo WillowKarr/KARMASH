@@ -217,21 +217,6 @@ hoverElements.forEach(el => {
     });
 });
 
-/* Добавьте это к существующему CSS */
-a, button, [role="button"], [data-cursor-hover] {
-    cursor: none !important;
-}
-
-.cursor {
-    /* ... существующие стили ... */
-    transition: transform 0.2s ease, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
-}
-
-.cursor-follower {
-    /* ... существующие стили ... */
-    transition: transform 0.4s ease, width 0.3s ease, height 0.3s ease, border 0.3s ease, background-color 0.3s ease;
-}
-
     // Modal functionality
     const projectButtons = document.querySelectorAll('.project-btn');
     const modals = document.querySelectorAll('.modal');
