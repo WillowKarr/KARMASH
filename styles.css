@@ -166,10 +166,7 @@ nav {
   height: 100%;
   object-fit: cover; /* Растягиваем изображение с сохранением пропорций */
   object-position: center;
-}
-        .hero::before {
-            content: '';
-            position: absolute;
+	position: absolute;
             top: 0;
             left: 0;
             width: 100%;
