@@ -152,7 +152,21 @@ nav {
             position: relative;
             overflow: hidden;
         }
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
 
+.hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Растягиваем изображение с сохранением пропорций */
+  object-position: center;
+}
         .hero::before {
             content: '';
             position: absolute;
