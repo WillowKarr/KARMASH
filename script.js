@@ -170,53 +170,6 @@
         }, 100);
     });
 
-    // Cursor effects on hover
-    const hoverElements = document.querySelectorAll('a, button, .project-card, .social-link, .burger');
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'scale(2)';
-            cursorFollower.style.transform = 'scale(0.5)';
-            cursorFollower.style.backgroundColor = 'transparent';
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.style.transform = 'scale(1)';
-            cursorFollower.style.transform = 'scale(1)';
-            cursorFollower.style.backgroundColor = 'transparent';
-        });
-    });
-
-hoverElements.forEach(el => {
-        el.style.cursor = 'none'; // Скрываем стандартный курсор
-        
-        el.addEventListener('mouseenter', function() {
-            cursor.style.transform = 'scale(2)';
-            follower.style.width = '30px';
-            follower.style.height = '30px';
-            follower.style.borderWidth = '1px';
-            follower.style.backgroundColor = 'rgba(139, 0, 0, 0.2)';
-        });
-        
-        el.addEventListener('mouseleave', function() {
-            cursor.style.transform = 'scale(1)';
-            follower.style.width = '20px';
-            follower.style.height = '20px';
-            follower.style.borderWidth = '2px';
-            follower.style.backgroundColor = 'transparent';
-        });
-    });
-    
-    // Клик анимация
-    document.addEventListener('mousedown', function() {
-        cursor.style.transform = 'scale(0.5)';
-        follower.style.transform += ' scale(0.8)';
-    });
-    
-    document.addEventListener('mouseup', function() {
-        cursor.style.transform = 'scale(1)';
-        follower.style.transform = follower.style.transform.replace(' scale(0.8)', '');
-    });
-});
-
     // Modal functionality
     const projectButtons = document.querySelectorAll('.project-btn');
     const modals = document.querySelectorAll('.modal');
