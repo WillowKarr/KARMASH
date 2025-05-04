@@ -474,6 +474,16 @@ document.addEventListener('DOMContentLoaded', function() {
       ]
     },
   };
+						'stickers': {
+      title: 'Стикеры для Тбанк"',
+      description: 'Цель мероприятия KidsDay, которому посвящен стикерпак:Укрепить взаимопонимание между родителями и детьми и повысить лояльность сотрудников и их семей. В итоге вышел забавный стикерпак с детьми, которые переняли основные черты работающих родителей.',
+	  tags: ['Adobe Illustrator'],
+      images: [
+		'element44.png',
+		'element45.png'
+      ]
+    },
+  };
   
   // Открытие модального окна
   galleryItems.forEach(item => {
