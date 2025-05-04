@@ -170,6 +170,21 @@
         }, 100);
     });
 
+    // Cursor effects on hover
+    const hoverElements = document.querySelectorAll('a, button, .project-card, .social-link, .burger');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(2)';
+            cursorFollower.style.transform = 'scale(0.5)';
+            cursorFollower.style.backgroundColor = 'transparent';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursorFollower.style.transform = 'scale(1)';
+            cursorFollower.style.backgroundColor = 'transparent';
+        });
+    });
+
     // Modal functionality
     const projectButtons = document.querySelectorAll('.project-btn');
     const modals = document.querySelectorAll('.modal');
