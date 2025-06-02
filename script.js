@@ -12,7 +12,6 @@
                     icon.style.transform = 'rotate(0)';
                 });
             });
-        });
 		 // Theme Toggle
     const themeToggle = document.querySelector('.theme-toggle');
     const body = document.body;
