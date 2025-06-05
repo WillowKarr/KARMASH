@@ -879,6 +879,7 @@ nav {
 }
 
 .slider-nav {
+cursor: none !important;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
