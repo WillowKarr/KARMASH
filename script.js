@@ -625,6 +625,121 @@ function animateTimeline() {
         }
     }
     
+  // Открытие модального окна
+  galleryItems.forEach(item => {
+    item.addEventListener('click', function() {
+      const projectId = this.dataset.project;
+      const project = projects[projectId];
+      
+      // Заполняем данными
+      projectTitle.textContent = project.title;
+      projectDesc.innerHTML = project.description;
+      
+      // Очищаем теги
+      projectTags.innerHTML = '';
+      project.tags.forEach(tag => {
+        const tagElement = document.createElement('span');
+        tagElement.className = 'project-tag';
+        tagElement.textContent = tag;
+        projectTags.appendChild(tagElement);
+      });
+      
+      // Очищаем слайдер и добавляем изображения
+      sliderContainer.innerHTML = '';
+      project.images.forEach((img, index) => {
+        const imgElement = document.createElement('img');
+        imgElement.src = img;
+        imgElement.alt = `${project.title} - ${index + 1}`;
+        if(index === 0) imgElement.classList.add('active-slide');
+        sliderContainer.appendChild(imgElement);
+      });
+      
+      // Показываем модальное окно
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  
+  // Закрытие модального окна
+  closeBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  });
+  
+  // Навигация слайдера
+  let currentSlide = 0;
+  
+  function updateSlider() {
+    const offset = -currentSlide * 100;
+    sliderContainer.style.transform = `translateX(${offset}%)`;
+  }
+  
+  nextBtn.addEventListener('click', function() {
+    const slides = document.querySelectorAll('.slider-container img');
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlider();
+  });
+  
+  prevBtn.addEventListener('click', function() {
+    const slides = document.querySelectorAll('.slider-container img');
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSlider();
+  });
+  
+  // Закрытие по клику вне окна
+  modal.addEventListener('click', function(e) {
+    if(e.target === modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Smooth scrolling for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+function animateTimeline() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const timelineTrack = document.querySelector('.timeline-track');
+    const timelineContainer = document.querySelector('.timeline-scroll-container');
+    const timelineSection = document.querySelector('.timeline-section');
+    
+    // Функция проверки видимости элементов для анимации
+    function checkVisibility() {
+        const timelineRect = timelineSection.getBoundingClientRect();
+        const triggerPoint = window.innerHeight * 0.8;
+        
+        // Проверяем, видна ли секция таймлайна
+        if (timelineRect.top < triggerPoint && timelineRect.bottom > 0) {
+            timelineItems.forEach((item, index) => {
+                const itemRect = item.getBoundingClientRect();
+                
+                // Анимируем только видимые элементы
+                if (itemRect.top < triggerPoint && itemRect.bottom > 0) {
+                    setTimeout(() => {
+                        item.classList.add('animate-in');
+                    }, index * 150);
+                }
+            });
+        }
+    }
+    
     // Создаем индикатор прокрутки
     const scrollIndicator = document.createElement('div');
     scrollIndicator.className = 'scroll-indicator';
