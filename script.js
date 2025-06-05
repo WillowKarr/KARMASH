@@ -1,4 +1,65 @@
-
+   document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('feedbackForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Валидация формы
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Проверка имени
+                const name = document.getElementById('name');
+                const nameError = document.getElementById('nameError');
+                if (name.value.trim() === '') {
+                    nameError.style.display = 'block';
+                    name.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    nameError.style.display = 'none';
+                    name.style.borderColor = '#dfe6e9';
+                }
+                
+                // Проверка email
+                const email = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    emailError.style.display = 'block';
+                    email.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                    email.style.borderColor = '#dfe6e9';
+                }
+                
+                // Проверка сообщения
+                const message = document.getElementById('message');
+                const messageError = document.getElementById('messageError');
+                if (message.value.trim() === '') {
+                    messageError.style.display = 'block';
+                    message.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    messageError.style.display = 'none';
+                    message.style.borderColor = '#dfe6e9';
+                }
+                
+                // Если форма валидна
+                if (isValid) {
+                    // Здесь можно добавить AJAX-запрос для отправки формы
+                    // Для примера просто покажем сообщение об успехе
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // Очистка формы через 5 секунд
+                    setTimeout(() => {
+                        form.reset();
+                        form.style.display = 'block';
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }
+            });
+            
             // Анимация при наведении на социальные иконки
             const socialLinks = document.querySelectorAll('.social-link');
             socialLinks.forEach(link => {
@@ -12,6 +73,7 @@
                     icon.style.transform = 'rotate(0)';
                 });
             });
+        });
 		 // Theme Toggle
     const themeToggle = document.querySelector('.theme-toggle');
     const body = document.body;
@@ -93,56 +155,35 @@
     window.addEventListener('scroll', checkScroll);
     window.addEventListener('load', checkScroll);
 
-  // Custom cursor
-const cursor = document.querySelector('.cursor');
-const cursorFollower = document.querySelector('.cursor-follower');
+    // Custom cursor
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
 
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    
-    setTimeout(() => {
-        cursorFollower.style.left = e.clientX + 'px';
-        cursorFollower.style.top = e.clientY + 'px';
-    }, 100);
-});
-
-// Cursor effects on hover
-const hoverElements = document.querySelectorAll('a, button, .gallery-item, .social-link, .burger');
-hoverElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(2)';
-        cursorFollower.style.transform = 'scale(0.5)';
-        cursorFollower.style.backgroundColor = 'transparent';
-    });
-    el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
-        cursorFollower.style.transform = 'scale(1)';
-        cursorFollower.style.backgroundColor = 'transparent';
-    });
-});
-    
-    document.querySelectorAll('button, .contact-btn').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'translate(-50%, -50%) scale(2)';
-            cursor.style.backgroundColor = 'var(--primary-color)';
-            cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.3)';
-            cursorFollower.style.backgroundColor = 'var(--secondary-color)';
-        });
-    });
-    
-    document.querySelectorAll('.burger, .theme-toggle').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'translate(-50%, -50%) rotate(45deg) scale(1.5)';
-            cursorFollower.style.transform = 'translate(-50%, -50%) rotate(-45deg) scale(0.5)';
-        });
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
         
+        setTimeout(() => {
+            cursorFollower.style.left = e.clientX + 'px';
+            cursorFollower.style.top = e.clientY + 'px';
+        }, 100);
+    });
+
+    // Cursor effects on hover
+    const hoverElements = document.querySelectorAll('a, button, .project-card, .social-link, .burger');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(2)';
+            cursorFollower.style.transform = 'scale(0.5)';
+            cursorFollower.style.backgroundColor = 'transparent';
+        });
         el.addEventListener('mouseleave', () => {
-            cursor.style.transform = 'translate(-50%, -50%) rotate(0) scale(1)';
-            cursorFollower.style.transform = 'translate(-50%, -50%) rotate(0) scale(1)';
+            cursor.style.transform = 'scale(1)';
+            cursorFollower.style.transform = 'scale(1)';
+            cursorFollower.style.backgroundColor = 'transparent';
         });
     });
-});
+
     // Modal functionality
     const projectButtons = document.querySelectorAll('.project-btn');
     const modals = document.querySelectorAll('.modal');
@@ -457,7 +498,6 @@ document.addEventListener('DOMContentLoaded', function() {
     },
   };
   
-  
   // Открытие модального окна
   galleryItems.forEach(item => {
     item.addEventListener('click', function() {
@@ -535,4 +575,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
 
