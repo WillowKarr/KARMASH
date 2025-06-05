@@ -1,4 +1,4 @@
-	:root {
+:root {
         --primary-color: #8B0000;
         --secondary-color: #FFD700;
         --bg-light: #FAF8F5;
@@ -54,7 +54,7 @@
 a, button, .gallery-item, .burger, .theme-toggle, .social-link, .contact-btn {
     cursor: none !important;
 }
-        /* Header Navigation */
+      /* Header Navigation */
         header {
         position: fixed;
         top: 15px; /* Отступ сверху */
