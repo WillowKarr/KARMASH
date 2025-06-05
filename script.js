@@ -93,87 +93,34 @@
     window.addEventListener('scroll', checkScroll);
     window.addEventListener('load', checkScroll);
 
-   // Улучшенный код для кастомного курсора
-document.addEventListener('DOMContentLoaded', function() {
-    const cursor = document.querySelector('.cursor');
-    const cursorFollower = document.querySelector('.cursor-follower');
+  // Custom cursor
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
     
-    // Скрываем стандартный курсор
-    document.body.style.cursor = 'none';
-    
-    // Элементы, на которых нужно скрыть стандартный курсор (добавлены стрелки слайдера)
-    const hoverElements = document.querySelectorAll(
-        'a, button, .gallery-item, .burger, .theme-toggle, .social-link, .contact-btn, .slider-nav'
-    );
-    
-    // Обработчики для основного курсора
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.transform = 'translate(-50%, -50%)';
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        // Задержка для follower-курсора
-        setTimeout(() => {
-            cursorFollower.style.transform = 'translate(-50%, -50%)';
-            cursorFollower.style.left = e.clientX + 'px';
-            cursorFollower.style.top = e.clientY + 'px';
-        }, 100);
+    setTimeout(() => {
+        cursorFollower.style.left = e.clientX + 'px';
+        cursorFollower.style.top = e.clientY + 'px';
+    }, 100);
+});
+
+// Cursor effects on hover
+const hoverElements = document.querySelectorAll('a, button, .gallery-item, .social-link, .burger');
+hoverElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'scale(2)';
+        cursorFollower.style.transform = 'scale(0.5)';
+        cursorFollower.style.backgroundColor = 'transparent';
     });
-    
-    // Эффекты при наведении на элементы
-    hoverElements.forEach(el => {
-        // При наведении
-        el.addEventListener('mouseenter', () => {
-            // Убираем стандартный курсор
-            el.style.cursor = 'none';
-            
-            // Увеличиваем основной курсор
-            cursor.style.transform = 'translate(-50%, -50%) scale(2)';
-            cursor.style.backgroundColor = 'transparent';
-            cursor.style.border = '2px solid var(--primary-color)';
-            
-            // Уменьшаем follower-курсор
-            cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.5)';
-            cursorFollower.style.backgroundColor = 'transparent';
-        });
-        
-        // При уходе с элемента
-        el.addEventListener('mouseleave', () => {
-            // Возвращаем курсоры в исходное состояние
-            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursor.style.backgroundColor = 'var(--primary-color)';
-            cursor.style.border = 'none';
-            
-            cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursorFollower.style.backgroundColor = 'transparent';
-            cursorFollower.style.border = '2px solid var(--primary-color)';
-        });
+    el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'scale(1)';
+        cursorFollower.style.transform = 'scale(1)';
+        cursorFollower.style.backgroundColor = 'transparent';
     });
-    
-    // Специальные эффекты для стрелок слайдера
-    document.querySelectorAll('.slider-nav').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
-            cursor.style.backgroundColor = 'var(--secondary-color)';
-            cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.3)';
-            cursorFollower.style.borderColor = 'var(--secondary-color)';
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursor.style.backgroundColor = 'var(--primary-color)';
-            cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursorFollower.style.borderColor = 'var(--primary-color)';
-        });
-    });
-    
-    // Остальные эффекты (как в предыдущем коде)
-    document.querySelectorAll('a, .gallery-item').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-            cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.8)';
-        });
-    });
+});
     
     document.querySelectorAll('button, .contact-btn').forEach(el => {
         el.addEventListener('mouseenter', () => {
