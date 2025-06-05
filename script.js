@@ -305,16 +305,16 @@ document.addEventListener('DOMContentLoaded', function() {
     },
   };
   
-  // Открытие модального окна
+// Открытие модального окна
   galleryItems.forEach(item => {
     item.addEventListener('click', function() {
       const projectId = this.dataset.project;
       const project = projects[projectId];
-      
+
       // Заполняем данными
       projectTitle.textContent = project.title;
       projectDesc.innerHTML = project.description;
-      
+
       // Очищаем теги
       projectTags.innerHTML = '';
       project.tags.forEach(tag => {
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function() {
         tagElement.textContent = tag;
         projectTags.appendChild(tagElement);
       });
-      
+
       // Очищаем слайдер и добавляем изображения
       sliderContainer.innerHTML = '';
       project.images.forEach((img, index) => {
@@ -333,6 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(index === 0) imgElement.classList.add('active-slide');
         sliderContainer.appendChild(imgElement);
       });
+
       // Показываем/скрываем стрелки навигации в зависимости от количества изображений
       if (project.images.length <= 1) {
         nextBtn.style.display = 'none';
@@ -341,38 +342,39 @@ document.addEventListener('DOMContentLoaded', function() {
         nextBtn.style.display = 'block';
         prevBtn.style.display = 'block';
       }
+
       // Показываем модальное окно
       modal.style.display = 'block';
       document.body.style.overflow = 'hidden';
     });
   });
-  
+
   // Закрытие модального окна
   closeBtn.addEventListener('click', function() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
   });
-  
+
   // Навигация слайдера
   let currentSlide = 0;
-  
+
   function updateSlider() {
     const offset = -currentSlide * 100;
     sliderContainer.style.transform = `translateX(${offset}%)`;
   }
-  
+
   nextBtn.addEventListener('click', function() {
     const slides = document.querySelectorAll('.slider-container img');
     currentSlide = (currentSlide + 1) % slides.length;
     updateSlider();
   });
-  
+
   prevBtn.addEventListener('click', function() {
     const slides = document.querySelectorAll('.slider-container img');
     currentSlide = (currentSlide - 1 + slides.length) % slides.length;
     updateSlider();
   });
-  
+
   // Закрытие по клику вне окна
   modal.addEventListener('click', function(e) {
     if(e.target === modal) {
@@ -380,7 +382,15 @@ document.addEventListener('DOMContentLoaded', function() {
       document.body.style.overflow = 'auto';
     }
   });
-});
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+  });
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
