@@ -333,7 +333,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if(index === 0) imgElement.classList.add('active-slide');
         sliderContainer.appendChild(imgElement);
       });
-      
+      // Показываем/скрываем стрелки навигации в зависимости от количества изображений
+      if (project.images.length <= 1) {
+        nextBtn.style.display = 'none';
+        prevBtn.style.display = 'none';
+      } else {
+        nextBtn.style.display = 'block';
+        prevBtn.style.display = 'block';
+      }
       // Показываем модальное окно
       modal.style.display = 'block';
       document.body.style.overflow = 'hidden';
