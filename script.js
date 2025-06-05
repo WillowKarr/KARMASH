@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Элементы, на которых нужно скрыть стандартный курсор
     const hoverElements = document.querySelectorAll(
-        'a, button, .gallery-item, .burger, .theme-toggle, .social-link, .contact-btn'
+        'a, button, .gallery-item, .burger, .theme-toggle, .social-link, .contact-btn, .slider-nav'
     );
     
     // Обработчики для основного курсора
