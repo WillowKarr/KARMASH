@@ -510,7 +510,7 @@ document.addEventListener('DOMContentLoaded', function() {
     },
   };
   
-  // Открытие модального окна
+    // Открытие модального окна
   galleryItems.forEach(item => {
     item.addEventListener('click', function() {
       const projectId = this.dataset.project;
@@ -579,6 +579,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -587,3 +588,151 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
+// Smooth scrolling for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+function animateTimeline() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const timelineTrack = document.querySelector('.timeline-track');
+    const timelineContainer = document.querySelector('.timeline-scroll-container');
+    const timelineSection = document.querySelector('.timeline-section');
+    
+    // Функция проверки видимости элементов для анимации
+    function checkVisibility() {
+        const timelineRect = timelineSection.getBoundingClientRect();
+        const triggerPoint = window.innerHeight * 0.8;
+        
+        // Проверяем, видна ли секция таймлайна
+        if (timelineRect.top < triggerPoint && timelineRect.bottom > 0) {
+            timelineItems.forEach((item, index) => {
+                const itemRect = item.getBoundingClientRect();
+                
+                // Анимируем только видимые элементы
+                if (itemRect.top < triggerPoint && itemRect.bottom > 0) {
+                    setTimeout(() => {
+                        item.classList.add('animate-in');
+                    }, index * 150);
+                }
+            });
+        }
+    }
+    
+    // Создаем индикатор прокрутки
+    const scrollIndicator = document.createElement('div');
+    scrollIndicator.className = 'scroll-indicator';
+    scrollIndicator.innerHTML = `
+        <span class="indicator-bar"></span>
+        <span class="scroll-indicator-text">Прокрутите, чтобы увидеть больше</span>
+    `;
+    timelineSection.appendChild(scrollIndicator);
+    
+    const indicatorBar = scrollIndicator.querySelector('.indicator-bar');
+    const indicatorText = scrollIndicator.querySelector('.scroll-indicator-text');
+    
+    // Функция обновления индикатора прокрутки
+    function updateScrollIndicator() {
+        const scrollWidth = timelineTrack.scrollWidth - timelineContainer.clientWidth;
+        const scrollLeft = timelineContainer.scrollLeft;
+        const progress = scrollWidth > 0 ? Math.min(scrollLeft / scrollWidth, 1) : 0;
+        
+        // Обновляем индикатор прогресса
+        indicatorBar.style.width = `${40 + (progress * 200)}px`;
+        indicatorBar.style.background = `linear-gradient(90deg, var(--primary-color) ${progress * 100}%, rgba(139, 0, 0, 0.2) ${progress * 100}%)`;
+        
+        // Скрываем текст при достижении конца
+        indicatorText.style.opacity = scrollLeft >= scrollWidth - 10 ? '0' : '0.7';
+    }
+    
+    // Ограничиваем скролл после последней карточки
+    function handleScrollEnd() {
+        const maxScroll = timelineTrack.scrollWidth - timelineContainer.clientWidth;
+        if (timelineContainer.scrollLeft > maxScroll) {
+            timelineContainer.scrollTo({
+                left: maxScroll,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    // Обработчики событий для десктопов
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    timelineContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - timelineContainer.offsetLeft;
+        scrollLeft = timelineContainer.scrollLeft;
+    });
+    
+    timelineContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        handleScrollEnd();
+    });
+    
+    timelineContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        handleScrollEnd();
+    });
+    
+    timelineContainer.addEventListener('mousemove', (e) => {
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - timelineContainer.offsetLeft;
+        const walk = (x - startX) * 2;
+        timelineContainer.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Обработчики для тач-устройств
+    timelineContainer.addEventListener('touchstart', (e) => {
+        isDown = true;
+        startX = e.touches[0].pageX - timelineContainer.offsetLeft;
+        scrollLeft = timelineContainer.scrollLeft;
+    });
+    
+    timelineContainer.addEventListener('touchend', () => {
+        isDown = false;
+        handleScrollEnd();
+    });
+    
+    timelineContainer.addEventListener('touchmove', (e) => {
+        if(!isDown) return;
+        const x = e.touches[0].pageX - timelineContainer.offsetLeft;
+        const walk = (x - startX) * 2;
+        timelineContainer.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Обновляем индикатор при скролле и ресайзе
+    timelineContainer.addEventListener('scroll', updateScrollIndicator);
+    window.addEventListener('resize', updateScrollIndicator);
+    
+    // Добавляем стрелки между элементами
+    timelineItems.forEach((item, index) => {
+        if (index < timelineItems.length - 1) {
+            const arrow = document.createElement('div');
+            arrow.className = 'timeline-arrow';
+            arrow.innerHTML = `
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                </svg>
+            `;
+            item.appendChild(arrow);
+        }
+    });
+    
+    // Инициализация
+    updateScrollIndicator();
+    checkVisibility();
+    window.addEventListener('scroll', checkVisibility);
+}
+
+// Запускаем после полной загрузки DOM
+document.addEventListener('DOMContentLoaded', animateTimeline);
