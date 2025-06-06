@@ -1008,7 +1008,7 @@ nav {
     }
     
     .logo img {
-        width: 60px;
+        width: 80px;
         height: auto;
     }
     
@@ -1046,7 +1046,7 @@ nav {
     
     /* Герой */
     .hero h1 {
-        font-size: 3rem;
+        font-size: 7rem;
         text-shadow: 2px 2px 0 var(--primary-color);
         margin-bottom: 0.5rem;
     }
@@ -1180,7 +1180,7 @@ nav {
 @media (max-width: 480px) {
     /* Герой */
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 4rem;
     }
     
     .hero p {
