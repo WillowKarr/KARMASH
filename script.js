@@ -472,3 +472,47 @@ function animateTimeline() {
 
 // Запускаем после полной загрузки DOM
 document.addEventListener('DOMContentLoaded', animateTimeline);
+
+// Мобильное меню с анимацией
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('nav');
+const navLinks = document.querySelectorAll('nav ul li a');
+
+// Проверяем, мобильное ли устройство
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+burger.addEventListener('click', () => {
+    if (!isMobile()) return;
+    
+    // Анимация бургера
+    burger.classList.toggle('active');
+    
+    // Анимация меню
+    nav.classList.toggle('mobile-open');
+    
+    // Блокировка скролла
+    document.body.classList.toggle('no-scroll');
+});
+
+// Закрытие меню при клике на ссылку
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (!isMobile()) return;
+        
+        burger.classList.remove('active');
+        nav.classList.remove('mobile-open');
+        document.body.classList.remove('no-scroll');
+    });
+});
+
+// Проверяем при изменении размера окна
+window.addEventListener('resize', () => {
+    if (!isMobile()) {
+        // На десктопе убедимся, что меню закрыто
+        burger.classList.remove('active');
+        nav.classList.remove('mobile-open');
+        document.body.classList.remove('no-scroll');
+    }
+});
