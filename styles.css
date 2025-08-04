@@ -13,6 +13,12 @@
 	      background-color: var(--bg-light);
             transition: var(--transition);
             overflow-x: hidden;
+	     background-image: url('ваше-изображение.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Фиксирует фон на месте */
+    background-repeat: no-repeat;
+    background-color: var(--bg-light); /* Фолбэк цвет */
     }
         * {
             margin: 0;
@@ -1567,3 +1573,4 @@ nav {
         font-family: 'a PlakatTitul', sans-serif;
     }
 }
+
